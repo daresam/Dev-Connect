@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
+    "classnames": "^2.2.6",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
@@ -15,8 +16,7 @@
     "react-transition-group": "^2.4.0",
     "reactstrap": "^6.2.0",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0",
-    "uuid": "^3.3.2"
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

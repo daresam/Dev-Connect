@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const keys = require('./config/keys');
 const users = require('./routes/api/users');
@@ -23,6 +24,7 @@ const port = process.env.PORT || 5000;
 // Passport Middleware
 app.use(passport.initialize());
 
+// app.use(cors());
 // Passport Strategy
 require('./config/passport')(passport);
 
