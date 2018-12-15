@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {Provider} from 'react-redux';
 
 import store from './store/store';
 import jwt_decode from 'jwt-decode';
-import {setCurrentUser, logoutUser} from './store/actions/authActions';
 import setAuthToken from './utils/setAuthToken';
+import {setCurrentUser, logoutUser} from './store/actions/authActions';
+import {clearCurrentProfile} from './store/actions/profileActions';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -14,6 +15,9 @@ import Footer from './components/layouts/Footer';
 import Landing from './components/layouts/Landing';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import Dashboard from './components/dashboard/Dashboard';
+import PrivateRoute from './components/common/PrivateRoute';
+import CreateProfile from './components/create-profile/CreateProfile';
 
 // import Page404 from './components/page-404/Page404';
 
@@ -33,7 +37,8 @@ if(token) {
   if (decoded.exp < currentTime) {
     // Logout User
     store.dispatch(logoutUser());
-    //  TODO: Clear user Profile
+    //  Clear user Profile
+    store.dispatch(clearCurrentProfile());
 
     // Redirect to login
     window.location.href = '/login';
@@ -53,6 +58,12 @@ class App extends Component {
                 {/* <Route  component={Page404} /> */}
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
+                <Switch >
+                  <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                </Switch>
+                <Switch >
+                  <PrivateRoute exact path="/create-profile" component={CreateProfile} />
+                </Switch>
               </div>
             <Footer />
           </div>
