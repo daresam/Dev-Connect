@@ -1,7 +1,7 @@
 {
-  "name": "devconnector",
+  "name": "devconnect",
   "version": "1.0.0",
-  "description": "Dev Connector built using MERN STACK",
+  "description": "Dev Connect built using MERN STACK",
   "main": "server.js",
   "scripts": {
     "npm client install": "npm install --prefix client",
@@ -11,7 +11,7 @@
     "dev": " concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [
-    "MONGO",
+    "MONGODB",
     "EXPRESS",
     "REACT",
     "NODE"
