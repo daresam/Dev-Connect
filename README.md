@@ -1,4 +1,4 @@
-# Shopping List MERN STACK
+# Dev-Connector - A MERN STACK App
 
 > Create full stack apps with React and Express. Run your client and server with a single command. 
 
