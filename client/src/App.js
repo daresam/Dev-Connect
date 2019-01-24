@@ -18,6 +18,10 @@ import Register from './components/auth/Register';
 import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/common/PrivateRoute';
 import CreateProfile from './components/create-profile/CreateProfile';
+import EditProfile from './components/edit-profile/EditProfile';
+import AddExperience from './components/add-credentials/AddExperience';
+import AddEducation from './components/add-credentials/AddEducation';
+import Profiles from './components/profiles/Profiles';
 
 // import Page404 from './components/page-404/Page404';
 
@@ -37,6 +41,7 @@ if(token) {
   if (decoded.exp < currentTime) {
     // Logout User
     store.dispatch(logoutUser());
+    window.location.reload();
     //  Clear user Profile
     store.dispatch(clearCurrentProfile());
 
@@ -63,6 +68,18 @@ class App extends Component {
                 </Switch>
                 <Switch >
                   <PrivateRoute exact path="/create-profile" component={CreateProfile} />
+                </Switch>
+                <Switch >
+                  <PrivateRoute exact path="/edit-profile" component={EditProfile} />
+                </Switch>
+                <Switch >
+                  <PrivateRoute exact path="/add-experience" component={AddExperience} />
+                </Switch>
+                <Switch >
+                  <PrivateRoute exact path="/add-education" component={AddEducation} />
+                </Switch>
+                <Switch >
+                  <PrivateRoute exact path="/profiles" component={Profiles} />
                 </Switch>
               </div>
             <Footer />

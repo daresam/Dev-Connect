@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getCurrentProfile} from '../../store/actions/profileActions';
+import {getCurrentProfile, deleteMyAccount} from '../../store/actions/profileActions';
 import Spinner from '../common/Spinner';
 import {Link} from 'react-router-dom';
+import ProfileAction from './ProfileAction';
+import Experience from './Experience';
+import Education from './Education';
 
 class Dashboard extends Component {
     state = {
@@ -17,6 +20,9 @@ class Dashboard extends Component {
     componentWillReceiveProps(nextProps) {
 
     }
+    onDeleteAccount = () => {
+        this.props.deleteMyAccount();
+    };
 
     
 
@@ -29,12 +35,20 @@ class Dashboard extends Component {
         } else {
             // check if user logged in and has profile
             if(Object.keys(profile).length > 0) {
-                dashboardContent = <h4>TODO Display profile</h4>
+                dashboardContent = 
+                    <div>
+                        <p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link> </p>
+                        <ProfileAction />
+                        <Experience experience={profile.experience} />
+                        <Education education={profile.education} />
+                        <div style={{marginBottom: '60px'}}></div>
+                        <button onClick={this.onDeleteAccount} className='btn btn-danger'>Delete My Account</button>
+                    </div>;
             } else {
                 // user logged in but no profile
                 dashboardContent = (
                     <div>
-                        <p className="lead text-muted">welcome {user.name}</p>
+                        <p className="lead text-muted">Welcome {user.name}</p>
                         <p>You have not setup your profile, please add some info</p>
                         <Link to="/create-profile" className="btn btn-lg btn-info">Create profile</Link>
                     </div>
@@ -66,4 +80,4 @@ const mapStateToProps = (state) => ({
     profile: state.profile,
     auth: state.auth
 });
-export default connect(mapStateToProps, {getCurrentProfile})(Dashboard);
+export default connect(mapStateToProps, {getCurrentProfile, deleteMyAccount})(Dashboard);

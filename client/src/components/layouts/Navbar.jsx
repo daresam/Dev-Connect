@@ -18,6 +18,9 @@ class Navbar extends Component {
       const {isAuthenticated, user} = this.props.auth;
       const authLinks = (
         <ul className="navbar-nav ml-auto">
+        <li className="nav-item">
+            <Link className="nav-link" to="/dashboard">Dashboard</Link>
+          </li>
           <li className="nav-item">
            <a className="nav-link" style={{cursor: 'pointer'}} onClick={this.onClickLogout}>
             <img  src={user ? user.avatar : '' } className="rounded-circle" alt={user ? user.name : ''}
@@ -39,7 +42,7 @@ class Navbar extends Component {
         return (
             <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
             <div className="container">
-              <Link className="navbar-brand" to="/">DevConnector</Link>
+              <Link className="navbar-brand" to="/">DevConnect</Link>
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
                 <span className="navbar-toggler-icon"></span>
               </button>
@@ -47,7 +50,7 @@ class Navbar extends Component {
               <div className="collapse navbar-collapse" id="mobile-nav">
                 <ul className="navbar-nav mr-auto">
                   <li className="nav-item">
-                    <Link className="nav-link" to="/profile"> Developers
+                    <Link className="nav-link" to="/profiles"> Developers
                     </Link>
                   </li>
                 </ul>

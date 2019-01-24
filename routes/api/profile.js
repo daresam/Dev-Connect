@@ -282,7 +282,7 @@ router.delete('/education/:edu_id', passport.authenticate('jwt', {
 
 });
 // @route /api/profile
-// @desc delete profile 
+// @desc delete profile Account
 // @access private
 router.delete('/', passport.authenticate('jwt', {
     session: false

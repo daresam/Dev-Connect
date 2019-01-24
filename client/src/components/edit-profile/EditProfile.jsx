@@ -6,9 +6,11 @@ import TextInput from '../common/TextInput';
 import TextArea from '../common/TextArea';
 import SelectInput from '../common/SelectInput';
 import InputGroup from '../common/InputGroup';
-import {createProfile} from '../../store/actions/profileActions';
+import {createProfile, getCurrentProfile} from '../../store/actions/profileActions';
+import isEmpty from '../../utils/isEmpty';
 
-class CreateProfile extends Component {
+
+class EditProfile extends Component {
     state = {
         displaySocialInputs: false,
         handle: '',
@@ -27,9 +29,50 @@ class CreateProfile extends Component {
         errors: {},
     };
 
+    componentDidMount() {
+        this.props.getCurrentProfile();
+    }
     componentWillReceiveProps(nextProps) {
         if(nextProps.errors) {
             this.setState({errors: nextProps.errors})
+        }
+        if(nextProps.profile.profile) {
+            const profile = nextProps.profile.profile;
+
+            // Bring back Skills Array to CSV
+            const skillsCSV = profile.skills.join(',');
+
+            // If profile doesn't exist, set to sring
+            profile.company = !isEmpty(profile.company) ? profile.company : '';
+            profile.website = !isEmpty(profile.website) ? profile.website : '';
+            profile.location = !isEmpty(profile.location) ? profile.location : '';
+            profile.githubusername = !isEmpty(profile.githubusername) ? profile.githubusername : '';
+            profile.handle = !isEmpty(profile.handle) ? profile.handle : '';
+            profile.status = !isEmpty(profile.status) ? profile.status : '';
+            profile.bio = !isEmpty(profile.bio) ? profile.bio : '';
+            profile.social = !isEmpty(profile.social) ? profile.social : {};
+            profile.twitter = !isEmpty(profile.social.twitter) ? profile.social.twitter : '';
+            profile.facebook = !isEmpty(profile.social.facebook) ? profile.social.facebook : '';
+            profile.instagram = !isEmpty(profile.social.instagram) ? profile.social.instagram : '';
+            profile.youtube = !isEmpty(profile.social.youtube) ? profile.social.youtube : '';
+            profile.linkedin = !isEmpty(profile.social.linkedin) ? profile.social.linkedin : '';
+
+            // Set component fields this.state.
+            this.setState({
+                skills: skillsCSV,
+                company: profile.company,
+                website: profile.website,
+                location: profile.location,
+                status: profile.status,
+                githubusername: profile.githubusername,
+                handle: profile.handle,
+                bio: profile.bio,
+                twitter: profile.social.twitter,
+                facebook: profile.social.facebook,
+                instagram: profile.social.instagram,
+                youtube: profile.social.youtube,
+                linkedin: profile.social.linkedin,
+            })
         }
     }
     onChange = (e) => {
@@ -121,15 +164,12 @@ class CreateProfile extends Component {
                 <div className="container">
                     <div className="ro">
                         <div className="colmd-8 m-auto">
-                            <Link to='/dashboard' className='btn btn-light' >
+                        <Link to='/dashboard' className='btn btn-light' >
                             <i className='fas fa-arrow-alt-circle-left'></i> Go back
                             </Link>
                             <h1 className="display-4 text-center">
-                            Create Your Profile
+                            Edit Your Profile
                             </h1>
-                            <p className="lead text-center">
-                            Let's get some information to make your profile stand out!
-                            </p>
                             <small className="d-block pb-3"><span className="text-danger">*</span> = required field</small>
                             <form onSubmit={this.onSubmit}>
                                 <TextInput
@@ -204,7 +244,7 @@ class CreateProfile extends Component {
                                     <span className='text-muted'>Optional</span>
                                 </div>
                                 {displaySocials}
-                                <button type='submit' className='btn btn-info btn-block'>Submit</button>
+                                <button type='submit' className='btn btn-info btn-block'>Update</button>
                             </form>
                         </div>
                     </div>
@@ -214,10 +254,12 @@ class CreateProfile extends Component {
     }
 }
 
-CreateProfile.propTypes = {
+
+EditProfile.propTypes = {
     profile: PropTypes.object.isRequired,
     createProfile: PropTypes.func.isRequired,
-    errors: PropTypes.object.isRequired
+    getCurrentProfile: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -225,4 +267,4 @@ const mapStateToProps = (state) => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, {createProfile})(withRouter(CreateProfile));
+export default connect(mapStateToProps, {createProfile, getCurrentProfile})(withRouter(EditProfile));

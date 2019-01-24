@@ -1,5 +1,5 @@
-import {GET_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE} from '../actions/types'
-
+import {GET_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, GET_SUCCESS, GET_PROFILES} from '../actions/types'
+import {toast} from 'react-toastify';
 const initialState = {
     profile: null,
     profiles: null,
@@ -13,11 +13,23 @@ export default function(state = initialState, action) {
                 ...state,
                 loading: true
             }
+        case GET_SUCCESS:
+            toast.success('Profile Registered Successfully');
+            return {
+                ...state,
+                profile: action.payload
+            }    
         case GET_PROFILE: 
         return {
             ...state,
             loading: false,
             profile: action.payload
+        }    
+        case GET_PROFILES: 
+        return {
+            ...state,
+            loading: false,
+            profiles: action.payload
         }    
         case CLEAR_CURRENT_PROFILE: 
             return {
