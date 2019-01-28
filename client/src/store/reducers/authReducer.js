@@ -12,7 +12,7 @@ import isEmpty from '../../utils/isEmpty';
  export default function (state = initialState, action) {
     switch(action.type) {
         case GET_SUCCESS: 
-            toast.success("User Registration was Successful!");
+            // toast.success("User Registration was Successful!");
             return {
                 ...state,
                 user:  action.payload

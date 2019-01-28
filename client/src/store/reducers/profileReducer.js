@@ -14,7 +14,7 @@ export default function(state = initialState, action) {
                 loading: true
             }
         case GET_SUCCESS:
-            toast.success('Profile Registered Successfully');
+            // toast.success('Profile Registered Successfully');
             return {
                 ...state,
                 profile: action.payload
