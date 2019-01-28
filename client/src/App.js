@@ -22,8 +22,11 @@ import EditProfile from './components/edit-profile/EditProfile';
 import AddExperience from './components/add-credentials/AddExperience';
 import AddEducation from './components/add-credentials/AddEducation';
 import Profiles from './components/profiles/Profiles';
+import Profile from './components/profiles/profile/Profile';
 
-// import Page404 from './components/page-404/Page404';
+import Page404 from './components/page-404/Page404';
+import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
 
 
 // Check for token
@@ -63,8 +66,10 @@ class App extends Component {
                 {/* <Route  component={Page404} /> */}
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/profiles" component={Profiles} />
+                <Route exact path="/profile/:handle" component={Profile} />
                 <Switch >
-                  <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                  <Route exact path="/dashboard" component={Dashboard} />
                 </Switch>
                 <Switch >
                   <PrivateRoute exact path="/create-profile" component={CreateProfile} />
@@ -78,9 +83,14 @@ class App extends Component {
                 <Switch >
                   <PrivateRoute exact path="/add-education" component={AddEducation} />
                 </Switch>
+                <Route exact path="/not-found" component={Page404} />
                 <Switch >
-                  <PrivateRoute exact path="/profiles" component={Profiles} />
+                  <PrivateRoute exact path="/post-feed" component={Posts} />
                 </Switch>
+                <Switch >
+                  <PrivateRoute exact path="/post/:id" component={Post} />
+                </Switch>
+                
               </div>
             <Footer />
           </div>

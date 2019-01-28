@@ -60,7 +60,8 @@ router.post('/', passport.authenticate('jwt', {
         avatar: req.body.avatar
     });
 
-    newPost.save().then(post => res.json(post));
+    newPost.save().then(post => res.json(post))
+                  .catch(err => res.json(err));
 });
 // @route /api/posts
 // @desc update post 
