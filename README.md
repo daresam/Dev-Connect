@@ -1,9 +1,8 @@
 # Dev-Connect - Social network built with the MERN stack
 
-# Create a developer profile/portfolio, share posts and get help from other developers
+> Create a developer profile/portfolio, share posts and get help from other developers
 
 > Create full stack apps with React and Express. Run your client and server with a single command. 
-
 
 
 ## Quick Start
