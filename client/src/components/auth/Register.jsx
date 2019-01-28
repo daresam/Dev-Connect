@@ -47,7 +47,7 @@ class Register extends Component {
             <div className="register">
                 <div className="container">
                 <div className="row">
-                    <div className="col-md-8 m-auto">
+                    <div className="col-md-6 m-auto">
                     <h1 className="display-4 text-center">Sign Up</h1>
                     <p className="lead text-center">Create your DevConnector account</p>
                     <form  onSubmit={this.onSubmit}>
@@ -86,7 +86,7 @@ class Register extends Component {
                             onChange={this.onChangeInput}
                             
                         />
-                        <input type="submit" className="btn btn-info btn-block mt-4" />
+                        <input type="submit" className="btn btn-info btn-block my-5" />
                         
                     </form>
                     </div>

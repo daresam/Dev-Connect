@@ -213,7 +213,7 @@ router.delete('/comment/:id/:comment_id', passport.authenticate('jwt', {
                 });
             }
             // removedd index
-            const removedIndex = post.comments.map(comment => comment._id).indexOf(req.params.comment_id);
+            const removedIndex = post.comments.map(comment => comment._id.toString()).indexOf(req.params.comment_id);
 
             // Remove comment from array
             post.comments.splice(removedIndex, 1);
